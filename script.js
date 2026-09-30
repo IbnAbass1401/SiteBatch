@@ -547,10 +547,10 @@ $("#applyRatioBtn").addEventListener(
         const cement =
             Number($("#cementRatio").value);
 
-        const granite =
+        const sand =
             Number($("#sandRatio").value);
 
-        const sand =
+        const granite =
             Number($("#graniteRatio").value);
 
 
