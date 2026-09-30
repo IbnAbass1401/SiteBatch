@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SiteBatch is a concrete batching counter and civil engineering unit converter for site work." />
+  <title>SiteBatch — Concrete Batch Counter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="SiteBatch home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span>
+          <strong>SiteBatch</strong>
+          <small>Field batching tools</small>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#counter">Batch counter</a>
+        <a href="#converter">Converter</a>
+        <a href="#history">History</a>
+      </nav>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle theme" title="Toggle theme">
+        <svg class="icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/></svg>
+        <svg class="icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.5 14.7A8.5 8.5 0 0 1 9.3 3.5 8.5 8.5 0 1 0 20.5 14.7Z"/></svg>
+      </button>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="eyebrow">FIELD TOOL / CONCRETE CONTROL</p>
+          <h1>Count the batch.<br><span>Keep the ratio right.</span></h1>
+          <p class="hero-copy">A simple site companion for tracking bucket-by-bucket concrete batching without losing count in the middle of a busy pour.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#counter">Start a batch</a>
+            <a class="text-link" href="#converter">Open unit converter <span>→</span></a>
+          </div>
+        </div>
+        <div class="hero-status">
+          <span class="status-dot"></span>
+          <span>Field mode ready</span>
+        </div>
+      </section>
+
+      <section class="content-section" id="counter">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / BATCH COUNTER</p>
+            <h2>Track each bucket as it goes in.</h2>
+          </div>
+          <div class="session-controls">
+            <label class="sr-only" for="batchName">Batch name</label>
+            <input id="batchName" type="text" placeholder="Batch / location" maxlength="32" />
+            <button class="btn btn-secondary" id="resetBtn" type="button">Reset batch</button>
+          </div>
+        </div>
+
+        <div class="counter-grid">
+          <article class="card ratio-card">
+            <div class="card-top">
+              <div>
+                <p class="card-label">Mix ratio</p>
+                <h3 id="ratioTitle">1 : 2 : 4</h3>
+                <p class="muted">Cement : Granite : Sand</p>
+              </div>
+              <span class="ratio-badge">SITE RATIO</span>
+            </div>
+
+            <div class="ratio-presets" id="ratioPresets">
+              <button class="ratio-option active" data-cement="1" data-granite="2" data-sand="4">1 : 2 : 4</button>
+              <button class="ratio-option" data-cement="1" data-granite="5" data-sand="7">1 : 5 : 7</button>
+              <button class="ratio-option" data-cement="1" data-granite="4" data-sand="8">1 : 4 : 8</button>
+            </div>
+
+            <div class="custom-ratio">
+              <div class="custom-head">
+                <span>Custom ratio</span>
+                <span class="muted">C : G : S</span>
+              </div>
+              <div class="ratio-inputs">
+                <input id="cementRatio" type="number" min="1" step="1" value="1" aria-label="Cement ratio" />
+                <span>:</span>
+                <input id="graniteRatio" type="number" min="1" step="1" value="2" aria-label="Granite ratio" />
+                <span>:</span>
+                <input id="sandRatio" type="number" min="1" step="1" value="4" aria-label="Sand ratio" />
+                <button class="square-btn" id="applyRatioBtn" type="button" aria-label="Apply custom ratio">✓</button>
+              </div>
+            </div>
+
+            <div class="batch-progress">
+              <div class="progress-head">
+                <span>Current batch</span>
+                <strong id="batchStatus">0 / 7 buckets</strong>
+              </div>
+              <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+            </div>
+          </article>
+
+          <article class="card live-card">
+            <div class="card-top">
+              <div>
+                <p class="card-label">Live count</p>
+                <h3 id="batchPhase">Ready to count</h3>
+              </div>
+              <span class="live-pill"><span></span> LIVE</span>
+            </div>
+
+            <div class="count-display">
+              <div class="count-number" id="totalBuckets">0</div>
+              <div class="count-unit">buckets recorded</div>
+            </div>
+
+            <div class="material-grid">
+              <button class="material-btn cement" data-material="cement" type="button">
+                <span class="material-icon">C</span>
+                <span><small>Cement</small><strong id="cementCount">0</strong></span>
+                <span class="plus">+</span>
+              </button>
+              <button class="material-btn granite" data-material="granite" type="button">
+                <span class="material-icon">G</span>
+                <span><small>Granite</small><strong id="graniteCount">0</strong></span>
+                <span class="plus">+</span>
+              </button>
+              <button class="material-btn sand" data-material="sand" type="button">
+                <span class="material-icon">S</span>
+                <span><small>Sand</small><strong id="sandCount">0</strong></span>
+                <span class="plus">+</span>
+              </button>
+            </div>
+
+            <div class="undo-row">
+              <button class="btn btn-ghost" id="undoBtn" type="button">Undo last count</button>
+              <span class="last-action" id="lastAction">No material counted yet.</span>
+            </div>
+          </article>
+
+          <article class="card checklist-card">
+            <div class="card-top">
+              <div>
+                <p class="card-label">Batch checklist</p>
+                <h3>What remains</h3>
+              </div>
+              <span class="completion" id="completionText">0%</span>
+            </div>
+
+            <div class="check-list">
+              <div class="check-row" id="cementRow"><span class="check-box"></span><span>Cement</span><strong id="cementRemain">1 bag</strong></div>
+              <div class="check-row" id="graniteRow"><span class="check-box"></span><span>Granite</span><strong id="graniteRemain">2 buckets</strong></div>
+              <div class="check-row" id="sandRow"><span class="check-box"></span><span>Sand</span><strong id="sandRemain">4 buckets</strong></div>
+            </div>
+
+            <div class="note-box">
+              <strong>Site note</strong>
+              <p>The counter follows the site ratio you select. Confirm the actual batching convention with your supervising engineer before use.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section converter-section" id="converter">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">02 / UNIT CONVERTER</p>
+            <h2>Useful conversions for site work.</h2>
+          </div>
+          <p class="section-note">Length, area, volume, mass, force and pressure.</p>
+        </div>
+
+        <div class="converter-card card">
+          <div class="converter-tabs" id="converterTabs">
+            <button class="converter-tab active" data-category="length">Length</button>
+            <button class="converter-tab" data-category="area">Area</button>
+            <button class="converter-tab" data-category="volume">Volume</button>
+            <button class="converter-tab" data-category="mass">Mass</button>
+            <button class="converter-tab" data-category="force">Force</button>
+            <button class="converter-tab" data-category="pressure">Pressure</button>
+          </div>
+
+          <div class="converter-body">
+            <div class="convert-field">
+              <label for="fromValue">Value</label>
+              <input id="fromValue" type="number" inputmode="decimal" value="1" />
+            </div>
+            <div class="convert-field">
+              <label for="fromUnit">From</label>
+              <select id="fromUnit"></select>
+            </div>
+            <button class="swap-btn" id="swapBtn" type="button" aria-label="Swap units">⇄</button>
+            <div class="convert-field">
+              <label for="toUnit">To</label>
+              <select id="toUnit"></select>
+            </div>
+            <div class="result-panel">
+              <span>Converted value</span>
+              <strong id="convertResult">100 cm</strong>
+              <button class="copy-result" id="copyResult" type="button">Copy</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section history-section" id="history">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">03 / BATCH HISTORY</p>
+            <h2>Keep a record of completed counts.</h2>
+          </div>
+          <button class="btn btn-secondary" id="clearHistoryBtn" type="button">Clear history</button>
+        </div>
+
+        <div class="history-card card">
+          <div class="history-head">
+            <span>Batch</span><span>Ratio</span><span>Count</span><span>Recorded</span>
+          </div>
+          <div id="historyList" class="history-list">
+            <div class="empty-history">Completed batches will appear here.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div><strong>Copyright © 2026 SiteBatch</strong></div>
+      <span>Local tool • No account required</span>
+    </footer>
+  </div>
+
+  <dialog id="toolDialog">
+    <div class="dialog-head">
+      <div><p class="eyebrow" id="dialogEyebrow">TOOL</p><h3 id="dialogTitle">Concrete volume</h3></div>
+      <button class="close-dialog" id="closeDialog" type="button" aria-label="Close">×</button>
+    </div>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
