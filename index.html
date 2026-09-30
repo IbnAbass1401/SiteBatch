@@ -68,28 +68,28 @@
               <div>
                 <p class="card-label">Mix ratio</p>
                 <h3 id="ratioTitle">1 : 2 : 4</h3>
-                <p class="muted">Cement : Granite : Sand</p>
+                <p class="muted">Cement : Sand : Granite</p>
               </div>
               <span class="ratio-badge">SITE RATIO</span>
             </div>
 
             <div class="ratio-presets" id="ratioPresets">
-              <button class="ratio-option active" data-cement="1" data-granite="2" data-sand="4">1 : 2 : 4</button>
-              <button class="ratio-option" data-cement="1" data-granite="5" data-sand="7">1 : 5 : 7</button>
-              <button class="ratio-option" data-cement="1" data-granite="4" data-sand="8">1 : 4 : 8</button>
+              <button class="ratio-option active" data-cement="1" data-sand="2" data-granite="4">1 : 2 : 4</button>
+              <button class="ratio-option" data-cement="1" data-sand="5" data-granite="7">1 : 5 : 7</button>
+              <button class="ratio-option" data-cement="1" data-sand="4" data-granite="8">1 : 4 : 8</button>
             </div>
 
             <div class="custom-ratio">
               <div class="custom-head">
                 <span>Custom ratio</span>
-                <span class="muted">C : G : S</span>
+                <span class="muted">C : S : G</span>
               </div>
               <div class="ratio-inputs">
                 <input id="cementRatio" type="number" min="1" step="1" value="1" aria-label="Cement ratio" />
                 <span>:</span>
-                <input id="graniteRatio" type="number" min="1" step="1" value="2" aria-label="Granite ratio" />
+                <input id="sandRatio" type="number" min="1" step="1" value="2" aria-label="Sand ratio" />
                 <span>:</span>
-                <input id="sandRatio" type="number" min="1" step="1" value="4" aria-label="Sand ratio" />
+                <input id="graniteRatio" type="number" min="1" step="1" value="4" aria-label="Granite ratio" />
                 <button class="square-btn" id="applyRatioBtn" type="button" aria-label="Apply custom ratio">✓</button>
               </div>
             </div>
@@ -123,14 +123,14 @@
                 <span><small>Cement</small><strong id="cementCount">0</strong></span>
                 <span class="plus">+</span>
               </button>
-              <button class="material-btn granite" data-material="granite" type="button">
-                <span class="material-icon">G</span>
-                <span><small>Granite</small><strong id="graniteCount">0</strong></span>
-                <span class="plus">+</span>
-              </button>
-              <button class="material-btn sand" data-material="sand" type="button">
+              <button class="material-btn granite" data-material="sand" type="button">
                 <span class="material-icon">S</span>
                 <span><small>Sand</small><strong id="sandCount">0</strong></span>
+                <span class="plus">+</span>
+              </button>
+              <button class="material-btn sand" data-material="granite" type="button">
+                <span class="material-icon">G</span>
+                <span><small>Granite</small><strong id="graniteCount">0</strong></span>
                 <span class="plus">+</span>
               </button>
             </div>
@@ -152,8 +152,8 @@
 
             <div class="check-list">
               <div class="check-row" id="cementRow"><span class="check-box"></span><span>Cement</span><strong id="cementRemain">1 bag</strong></div>
-              <div class="check-row" id="graniteRow"><span class="check-box"></span><span>Granite</span><strong id="graniteRemain">2 buckets</strong></div>
-              <div class="check-row" id="sandRow"><span class="check-box"></span><span>Sand</span><strong id="sandRemain">4 buckets</strong></div>
+              <div class="check-row" id="sandRow"><span class="check-box"></span><span>Sand</span><strong id="sandRemain">2 buckets</strong></div>
+              <div class="check-row" id="graniteRow"><span class="check-box"></span><span>Granite</span><strong id="graniteRemain">4 buckets</strong></div>
             </div>
 
             <div class="note-box">

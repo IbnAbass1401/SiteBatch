@@ -9,14 +9,14 @@ const $$ = (selector) => [...document.querySelectorAll(selector)];
 const state = {
     ratio: {
         cement: 1,
-        granite: 2,
-        sand: 4
+        sand: 2,
+        granite: 4
     },
 
     counts: {
         cement: 0,
-        granite: 0,
-        sand: 0
+        sand: 0,
+        granite: 0
     },
 
     actions: [],
@@ -121,8 +121,8 @@ function currentTarget(material) {
 function totalTarget() {
     return (
         state.ratio.cement +
-        state.ratio.granite +
-        state.ratio.sand
+        state.ratio. sand+
+        state.ratio.granite
     );
 }
 
@@ -130,8 +130,8 @@ function totalTarget() {
 function totalCount() {
     return (
         state.counts.cement +
-        state.counts.granite +
-        state.counts.sand
+        state.counts.sand +
+        state.counts.granite
     );
 }
 
@@ -142,7 +142,7 @@ function totalCount() {
 
 function updateCounter() {
     $("#ratioTitle").textContent =
-        `${state.ratio.cement} : ${state.ratio.granite} : ${state.ratio.sand}`;
+        `${state.ratio.cement} : ${state.ratio.sand} : ${state.ratio.granite}`;
 
     const total = totalTarget();
     const count = totalCount();
@@ -158,7 +158,7 @@ function updateCounter() {
     $("#progressFill").style.width = `${percent}%`;
     $("#completionText").textContent = `${percent}%`;
 
-    ["cement", "granite", "sand"].forEach((material) => {
+    ["cement", "sand", "granite"].forEach((material) => {
         const countEl = $(`#${material}Count`);
         const remainEl = $(`#${material}Remain`);
         const row = $(`#${material}Row`);
@@ -212,25 +212,25 @@ function updateCounter() {
    RATIO MANAGEMENT
 ================================ */
 
-function setRatio(cement, granite, sand) {
+function setRatio(cement, sand, granite) {
     state.ratio = {
         cement,
-        granite,
-        sand
+        sand,
+        granite
     };
 
     state.counts = {
         cement: 0,
-        granite: 0,
-        sand: 0
+        sand: 0,
+        granite: 0
     };
 
     state.actions = [];
 
 
     $("#cementRatio").value = cement;
-    $("#graniteRatio").value = granite;
     $("#sandRatio").value = sand;
+    $("#graniteRatio").value = granite;
 
 
     $$(".ratio-option").forEach((btn) => {
@@ -238,8 +238,8 @@ function setRatio(cement, granite, sand) {
             "active",
 
             Number(btn.dataset.cement) === cement &&
-            Number(btn.dataset.granite) === granite &&
-            Number(btn.dataset.sand) === sand
+            Number(btn.dataset.sand) === sand &&
+            Number(btn.dataset.granite) === granite
         );
     });
 
@@ -327,8 +327,8 @@ function materialNames(material) {
 function resetBatch() {
     state.counts = {
         cement: 0,
-        granite: 0,
-        sand: 0
+        sand: 0,
+        granite: 0
     };
 
     state.actions = [];
@@ -404,8 +404,8 @@ function saveCompletedBatch() {
 
         ratio:
             `${state.ratio.cement} : ` +
-            `${state.ratio.granite} : ` +
-            `${state.ratio.sand}`,
+            `${state.ratio.sand} : ` +
+            `${state.ratio.granite}`,
 
         count: totalCount(),
 
@@ -529,8 +529,8 @@ $$(".ratio-option").forEach((btn) => {
         () => {
             setRatio(
                 Number(btn.dataset.cement),
-                Number(btn.dataset.granite),
-                Number(btn.dataset.sand)
+                Number(btn.dataset.sand),
+                Number(btn.dataset.granite)
             );
         }
     );
@@ -548,17 +548,17 @@ $("#applyRatioBtn").addEventListener(
             Number($("#cementRatio").value);
 
         const granite =
-            Number($("#graniteRatio").value);
+            Number($("#sandRatio").value);
 
         const sand =
-            Number($("#sandRatio").value);
+            Number($("#graniteRatio").value);
 
 
         if (
             ![
                 cement,
-                granite,
-                sand
+                sand,
+                granite
             ].every(
                 (number) =>
                     Number.isInteger(number) &&
@@ -575,8 +575,8 @@ $("#applyRatioBtn").addEventListener(
 
         setRatio(
             cement,
-            granite,
-            sand
+            sand,
+            granite
         );
 
         showToast(
@@ -673,11 +673,11 @@ document.addEventListener(
         }
 
         if (event.key === "2") {
-            addMaterial("granite");
+            addMaterial("sand");
         }
 
         if (event.key === "3") {
-            addMaterial("sand");
+            addMaterial("granite");
         }
 
         if (event.key.toLowerCase() === "z") {
