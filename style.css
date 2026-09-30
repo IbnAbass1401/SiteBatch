@@ -1483,10 +1483,6 @@ dialog::backdrop {
     .hero {
         min-height: 570px;
 
-        margin: 0 -15px;
-
-        padding: 70px 7%;
-
         border-radius: 0 0 22px 22px;
     }
 

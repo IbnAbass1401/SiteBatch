@@ -12,6 +12,10 @@ Manually counting each bucket while materials are being poured can be tiring and
 
 SiteBatch provides a simple digital counter where each material can be recorded with a button as it is added to the mixer.
 
+## Live Website
+
+[View Project](https://sitebatch.vercel.app/)
+
 ## Features
 
 * Track cement, granite, and sand quantities
